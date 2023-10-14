@@ -428,6 +428,28 @@ func TestRendersEndOfLineBuffer(t *testing.T) {
 	}
 }
 
+func TestListInfo(t *testing.T) {
+	textarea := newTextArea()
+
+	textarea.SetValue("abc")
+	r := textarea.LineInfo().Row
+	if r != 0 {
+		t.Errorf("Line info error. Output %d", r)
+	}
+
+	textarea.SetValue("abc\n")
+	r = textarea.LineInfo().Row
+	if r != 1 {
+		t.Errorf("Line info error.")
+	}
+
+	textarea.SetValue("abcd\n\n")
+	r = textarea.LineInfo().Row
+	if r != 2 {
+		t.Errorf("Line info error. Output %d", r)
+	}
+}
+
 func newTextArea() Model {
 	textarea := New()
 

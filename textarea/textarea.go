@@ -109,6 +109,7 @@ type LineInfo struct {
 	// ColumnOffset, but will be different there are double-width runes before
 	// the cursor.
 	CharOffset int
+	Row        int
 }
 
 // Style that will be applied to the text area.
@@ -786,6 +787,7 @@ func (m Model) LineInfo() LineInfo {
 				StartColumn:  m.col,
 				Width:        len(grid[i+1]),
 				CharWidth:    rw.StringWidth(string(line)),
+				Row:          m.row,
 			}
 		}
 
@@ -798,6 +800,7 @@ func (m Model) LineInfo() LineInfo {
 				StartColumn:  counter,
 				Width:        len(line),
 				CharWidth:    rw.StringWidth(string(line)),
+				Row:          m.row,
 			}
 		}
 
