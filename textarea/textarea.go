@@ -306,6 +306,23 @@ func (m *Model) InsertRune(r rune) {
 	m.insertRunesFromUserInput([]rune{r})
 }
 
+func (m *Model) Position() int {
+	pos := 0
+	for i := 0; i < m.row+1; i++ {
+		if i > 0 {
+			pos += 1
+		}
+		if i == m.row {
+			if m.col > 0 {
+				pos += len(m.value[i][0:m.col])
+			}
+		} else {
+			pos += len(m.value[i])
+		}
+	}
+	return pos
+}
+
 // insertRunesFromUserInput inserts runes at the current cursor position.
 func (m *Model) insertRunesFromUserInput(runes []rune) {
 	// Clean up any special characters in the input provided by the
