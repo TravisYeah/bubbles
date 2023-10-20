@@ -448,6 +448,11 @@ func (m Model) Line() int {
 	return m.row
 }
 
+func (m *Model) CursorBottom() {
+	m.row = len(m.value) - 1
+	m.col = 0
+}
+
 // CursorDown moves the cursor down by one line.
 // Returns whether or not the cursor blink should be reset.
 func (m *Model) CursorDown() {
